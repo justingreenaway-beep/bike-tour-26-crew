@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Only these emails can read or write anything. Use lowercase. Keep in step with config.js.
+    function isCrew() {
+      return request.auth != null
+        && request.auth.token.email != null
+        && request.auth.token.email.lower() in [
+          'justin@example.com', 'tony@example.com', 'ewart@example.com', 'mel@example.com',
+          'trish@example.com', 'tracey@example.com', 'mark@example.com', 'shannon@example.com',
+          'mick@example.com', 'gary@example.com', 'garry@example.com', 'marshall@example.com'
+        ];
+    }
+
+    // Each rider's passport, scores, votes, quiz and Koala Court charges: everyone reads, only the owner writes.
+    match /crew/{uid} {
+      allow read: if isCrew();
+      allow write: if isCrew() && request.auth.uid == uid;
+    }
+
+    // Shared photo wall, live tracker position and dinner details.
+    match /wall/{id}     { allow read, write: if isCrew(); }
+    match /wallfull/{id} { allow read, write: if isCrew(); }
+    match /live/{id}     { allow read, write: if isCrew(); }
+  }
+}
