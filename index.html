@@ -456,6 +456,12 @@ section.dinners{margin:56px 0 0}
   @keyframes lout{to{opacity:0;transform:scale(1.02)}}
 }
 html.landing-on,html.landing-on body{overflow:hidden}
+.ddate{display:block;margin-top:4px;font:600 17px/1.2 var(--body);color:var(--ink);text-transform:none;letter-spacing:0}
+.ddate:empty{display:none}
+.setdate{all:unset;cursor:pointer;font:600 14px/1 var(--body);color:var(--c);border:1.5px dashed var(--c);border-radius:999px;padding:6px 10px}
+.wxride.first{margin-top:0;padding-top:0;border-top:0}
+.wxk{display:block;font:700 12px/1.2 var(--body)!important;color:var(--c)!important;text-transform:uppercase;letter-spacing:.04em;margin:0 0 3px!important}
+.wxnowline{font-size:13px;color:var(--muted);margin:8px 0 0;padding-top:6px;border-top:1px dotted var(--rule)}
 </style>
 </head>
 <body>
@@ -970,31 +976,31 @@ const BEST={
 4:{from:'Huskisson',to:'Nerriga',title:'Huskisson to Nerriga',why:'Turpentine and Braidwood roads climb off the coast through empty forest onto the tablelands. It\u2019s quiet, flowing riding with the morning still cool, before the cruise home.'}};
 
 const SOLO=[
- {n:0, solo:true, col:'--dj', navl:'Ride down', lab:'Justin only, before Day 1', title:'Caringbah to Conder', km:'~315', ride:'~3 h 15 m', total:'~3 h 45 m',
-  feel:'Mostly motorway; an early, cool start',
+ {n:0, solo:true, col:'--dj', navl:'Ride down', lab:'Justin only, the day before Day 1', title:'Caringbah to Conder', km:'~315', ride:'~3 h 15 m', total:'~3 h 45 m',
+  feel:'Mostly motorway; an easy afternoon run',
   roads:'M1 and Picton Rd, Hume Motorway, Federal Hwy past Lake George, Tuggeranong Parkway. Distances and times are estimates; check them in a maps app.',
   map:'', fuelNote:'Caringbah to Goulburn is about 190 km, just over the group\u2019s 183 km rule. If your range is tight, top up at the Sutton Forest services on the Hume.',
-  best:{from:'Goulburn',to:'Conder',title:'Goulburn to Conder',why:'The Federal Highway runs along the edge of Lake George in the early light, then the Tuggeranong Parkway sweeps you into Lanyon in time for coffee. Not technical, just a good way to wake up.'},
+  best:{from:'Goulburn',to:'Conder',title:'Goulburn to Conder',why:'The Federal Highway runs along the edge of Lake George in the afternoon light, then the Tuggeranong Parkway brings you into the south of Canberra. Not technical, just a relaxed finish to the run down.'},
   stops:[
-   {t:'Caringbah', road:'Home', time:'Depart about 4:45 am', tags:['Start'],
-    note:'Leaving the Shire in the dark to make 8:30 am coffee at Lanyon. Fuel up the night before.',
-    audit:'Nothing is open at a 4:45 am departure. Bourke Street opens at 5:30 am Tuesday to Friday if you leave a little later. Otherwise, save these for the welcome-home coffee.',
+   {t:'Caringbah', road:'Home', time:'Depart 12:00 pm', tags:['Start'],
+    note:'A midday start, arriving in Canberra the afternoon before so Day 1 starts fresh. Fuel up before you leave.',
+    audit:'Leaving at noon, so a pie for the road is on. FLOUR (open until 2 pm) and Bourke Street are the picks, both a few minutes from home.',
     b:[
      ['FLOUR coffee & doughroom','ChIJNx-mErbHEmsRuiflwe7lB40',4.7,523,'Daily 7 am to 2 pm','Caringbah South. Queues out the door for focaccia, danishes and pies.'],
      ['Home Bakery and Caf\u00e9','ChIJ0-sPbgq4EmsRsrabpNU6gpA',4.8,129,'Mon to Sat 7:30 am to 3 pm, Sun from 9 am','Willarong Rd. Fair prices and very friendly staff.'],
      ['Vu\u2019s Bakehouse Caringbah','ChIJFdab4ILHEmsRA8EyaBCuWCU',4.8,28,'Weekdays 7 am to 6 pm, weekends to 4 pm','Kingsway. Homemade pies, artisan sourdough and fresh banh mi.'],
      ['The Family Bakehouse','ChIJQ23lnsHHEmsRS1U7lpEzLUg',4.6,68,'Daily from 6 am (weekends to 1:30 pm)','Port Hacking Rd. Old-school bread, cupcakes and sweets.'],
      ['Bourke Street Bakery Caringbah','ChIJeyOVzsG5EmsR1zOUVyLuxiw',4.4,107,'Tue to Fri from 5:30 am, Mon and weekends from 7 am','Cawarra Rd. The earliest opener, with good pies and pastries.']]},
-   {t:'Goulburn', road:'Hume Motorway', time:'Arrive about 6:45 am, depart 7:15 am', fuel:'~190 km', tags:['Fuel','Breakfast'],
+   {t:'Goulburn', road:'Hume Motorway', time:'Arrive about 2:00 pm, depart 2:30 pm', fuel:'~190 km', tags:['Fuel','Late lunch'],
     note:'Wool city on the Hume, home of the Big Merino.',
-    audit:'Trappers is the obvious stop: open from 5:30 am every day, with a big car park right by the highway exit.',
+    audit:'Trappers is the obvious late-lunch stop: open until 6 pm every day, with a big car park right by the highway exit.',
     b:[
      ['Trappers Bakery','ChIJD-mqdJCvFmsRBKTJXrLqhwk',4.3,5188,'Daily 5:30 am to 6 pm','Next to the Big Merino. Huge range, barista coffee and an open fire in winter.'],
      ['Goulburn Bakery','ChIJ2bXjURyvFmsRmNyr6WUrSws',4.5,129,'Mon to Sat from 5 am, closed Sun','Auburn St. A solid old-school bakery with pastry that holds together.'],
      ['Bryants Bakery Cafe','ChIJebqlTRyvFmsRENSJkLeuQ_M',4.1,160,'Weekdays from 6 am, Sun from 8 am','Auburn St. Pies are hit and miss; the caramel slice is the standout.'],
      ['TBP Baking','ChIJJT5plOGuFmsRLOq4gbJ1mQU',4.4,5,'Weekdays and Sat from 5 am, Sun from 9 am','New on Auburn St with only a handful of reviews.'],
      ['Bryants Pies','ChIJKXIHTRyvFmsRsrozZeNWDUw',4.0,90,'Weekdays from 6 am, Sat 7 am, Sun 10 am','Flaky pies and sausage rolls; reviews are uneven.']]},
-   {t:'Conder', road:'Federal Hwy, Tuggeranong Parkway', time:'Arrive 8:30 am for coffee', tags:['Meet the crew'], ref:'Day 1 starts here. See Day 1 for Lanyon bakeries.', b:[]}
+   {t:'Conder', road:'Federal Hwy, Tuggeranong Parkway', time:'Arrive about 3:45 pm', tags:['Finish'], ref:'Day 1 starts here tomorrow, with coffee at 8:30 am at Lanyon Shops. See Day 1 for Lanyon bakeries.', b:[]}
   ]},
  {n:5, solo:true, col:'--dj', navl:'Ride home', lab:'Justin only, Day 4', title:'Huskisson to Caringbah', km:'~185', ride:'~2 h 45 m', total:'~4 h',
   feel:'Coastal cruising, then the best coast road in NSW',
@@ -1156,7 +1162,7 @@ ORDER.forEach((d,i)=>{
   const seg=d.opt?`<div class="seg" role="group" aria-label="Day 3 route option"><button type="button" aria-pressed="true" data-o="1">Option 1</button><button type="button" aria-pressed="false" data-o="2">Option 2 hectic loop</button></div>`:'';
   const bestCard=best?`<div class="best"><span class="lbl">Best leg of the day</span><h3>${esc(best.title)}</h3><p>${esc(best.why)}</p><a class="jump" href="#s${d.n}-${slug(best.from)}" data-flash="s${d.n}-${slug(best.to)}">Show me on the roadbook</a>${d.solo?'':`<div class="vote" data-vote="${d.n}"></div>`}</div>`:'';
   host.insertAdjacentHTML('beforeend',`<section class="day${d.solo?' solo':''}" id="day${d.n}" style="--d:var(${d.col})">
-    <div class="dayhead"><div class="no">${d.lab||'Day '+d.n}</div><h2>${esc(d.title)}</h2>${seg}
+    <div class="dayhead"><div class="no">${d.lab||'Day '+d.n}<span class="ddate" data-ddate="${d.n}"></span></div><h2>${esc(d.title)}</h2>${seg}
     <div class="stats"><div data-k="km">${d.km} km<small>distance</small></div><div data-k="ride">${d.ride}<small>riding</small></div><div data-k="total">${d.total}<small>with stops</small></div></div>
     <p class="feel" data-k="feel">${esc(d.feel)}</p><div data-wxday="${d.n}"></div><p class="roads" data-k="roads">${esc(d.roads)}</p>
     ${bestCard}
@@ -1612,7 +1618,7 @@ renderDinners();
 const WX_COORDS={'Conder':[-35.459,149.104],'Tharwa':[-35.509,149.069],'Cavan':[-34.98,148.87],'Yass':[-34.842,148.909],'Rye Park':[-34.517,148.909],'Cowra':[-33.835,148.691],'Blayney':[-33.532,149.254],'Millthorpe':[-33.446,149.185],'Bathurst':[-33.42,149.577],'Ilford':[-32.958,149.858],'Lithgow':[-33.481,150.157],'Penrith':[-33.751,150.694],'The Oaks':[-34.073,150.571],'Camden':[-34.054,150.696],'Picton':[-34.17,150.611],'Mount Keira':[-34.397,150.857],'Shellharbour':[-34.579,150.87],'Mount Murray':[-34.555,150.66],'Bowral':[-34.478,150.418],'Moss Vale':[-34.548,150.371],'Fitzroy Falls':[-34.645,150.481],'Kangaroo Valley':[-34.738,150.534],'Bellawongarah':[-34.765,150.62],'Kiama':[-34.671,150.854],'Jamberoo':[-34.647,150.776],'Robertson':[-34.588,150.596],'Wildes Meadow':[-34.613,150.53],'Bomaderry':[-34.85,150.61],'Currarong':[-35.016,150.82],'Huskisson':[-35.04,150.672],'Nerriga':[-35.115,150.084],'Bungendore':[-35.254,149.443],'Theodore':[-35.45,149.12],'Caringbah':[-34.047,151.122],'Goulburn':[-34.754,149.718],'Berry':[-34.775,150.695],'Wollongong':[-34.424,150.893]};
 const WX_TOWNS=Object.keys(WX_COORDS);
 const WXKEY='bt26-wx-v1';
-const SOLO_ETA={0:{'Caringbah':445,'Goulburn':645,'Conder':830},5:{'Huskisson':830,'Berry':915,'Wollongong':1045,'Caringbah':1230}};
+const SOLO_ETA={0:{'Caringbah':1200,'Goulburn':1400,'Conder':1545},5:{'Huskisson':830,'Berry':915,'Wollongong':1045,'Caringbah':1230}};
 const WXC={0:['Clear','\u2600\ufe0f'],1:['Mostly clear','\ud83c\udf24\ufe0f'],2:['Partly cloudy','\u26c5'],3:['Overcast','\u2601\ufe0f'],45:['Fog','\ud83c\udf2b\ufe0f'],48:['Icy fog','\ud83c\udf2b\ufe0f'],51:['Light drizzle','\ud83c\udf26\ufe0f'],53:['Drizzle','\ud83c\udf26\ufe0f'],55:['Heavy drizzle','\ud83c\udf27\ufe0f'],56:['Freezing drizzle','\ud83c\udf27\ufe0f'],57:['Freezing drizzle','\ud83c\udf27\ufe0f'],61:['Light rain','\ud83c\udf26\ufe0f'],63:['Rain','\ud83c\udf27\ufe0f'],65:['Heavy rain','\ud83c\udf27\ufe0f'],66:['Freezing rain','\ud83c\udf27\ufe0f'],67:['Freezing rain','\ud83c\udf27\ufe0f'],71:['Light snow','\ud83c\udf28\ufe0f'],73:['Snow','\ud83c\udf28\ufe0f'],75:['Heavy snow','\ud83c\udf28\ufe0f'],77:['Snow grains','\ud83c\udf28\ufe0f'],80:['Showers','\ud83c\udf26\ufe0f'],81:['Showers','\ud83c\udf27\ufe0f'],82:['Heavy showers','\ud83c\udf27\ufe0f'],85:['Snow showers','\ud83c\udf28\ufe0f'],86:['Snow showers','\ud83c\udf28\ufe0f'],95:['Thunderstorm','\u26c8\ufe0f'],96:['Storm with hail','\u26c8\ufe0f'],99:['Storm with hail','\u26c8\ufe0f']};
 const wxc=c=>WXC[c]||['\u2014',''];
 let WX=null; try{WX=JSON.parse(localStorage.getItem(WXKEY)||'null')}catch(e){}
@@ -1675,24 +1681,26 @@ const ago=ms=>{const m=Math.round((Date.now()-ms)/60000);return m<1?'just now':m
 const dayLbl=d=>d.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'});
 function townWx(dn,town){
   const W=WX&&WX.towns[town]; if(!W)return wxBusy?'<p class="wxmuted">Loading weather\u2026</p>':'';
-  const [t,fl,pr,code,ws,gu,ct]=W.c; const [lbl,ic]=wxc(code);
-  const now=`<div class="wxnow"><span class="wxic" aria-hidden="true">${ic}</span><div><b>${Math.round(t)}\u00b0</b> <span>${lbl}, feels ${Math.round(fl)}\u00b0</span><small>Now: wind ${Math.round(ws)} km/h, gusts ${Math.round(gu)}${pr>0?`, ${pr} mm rain`:''}</small></div></div>`;
-  let ride='';
+  const [t,fl,pr,code,ws,gu]=W.c; const [lbl,ic]=wxc(code);
+  const nowLine=`<p class="wxnowline">Right now: ${ic} ${Math.round(t)}\u00b0 ${lbl.toLowerCase()}, feels ${Math.round(fl)}\u00b0, gusts ${Math.round(gu)} km/h${pr>0?`, ${pr} mm rain`:''}</p>`;
   const date=rideDate(dn), eta=etaFor(dn,town);
-  if(!date) ride=`<p class="wxmuted">Set the tour start date in the tracker for the ride-day forecast.</p>`;
-  else{
-    const ds=isoDate(date), D=W.D[ds], today=isoDate(new Date());
-    if(ds<today) ride=`<p class="wxmuted">Ride day (${dayLbl(date)}) has passed.</p>`;
-    else if(!D) ride=`<p class="wxmuted">Ride-day forecast (${dayLbl(date)}) appears about 16 days out.</p>`;
-    else{
-      const H=hourAt(town,date,eta); const [dc,mx,mn,pp,gx]=D;
-      if(H){const [ht,hf,hp,hc,hw,hg]=H; const [hl,hi]=wxc(hc);
-        ride=`<div class="wxride"><span class="wxic" aria-hidden="true">${hi}</span><div><b>${dayLbl(date)}, ${fmtT(eta)}: ${Math.round(ht)}\u00b0</b> <span>${hl}, feels ${Math.round(hf)}\u00b0</span><small>Rain ${hp??0}%, wind ${Math.round(hw)} km/h, gusts ${Math.round(hg)}. Day ${Math.round(mn)}\u2013${Math.round(mx)}\u00b0</small><div class="wxflags">${flagHtml(wxFlags(ht,hf,hp,hg,hc))}</div></div></div>`;}
-      else{ const [dl,di]=wxc(dc); ride=`<div class="wxride"><span class="wxic" aria-hidden="true">${di}</span><div><b>${dayLbl(date)}: ${Math.round(mn)}\u2013${Math.round(mx)}\u00b0</b> <span>${dl}</span><small>Rain up to ${pp??0}%, gusts to ${Math.round(gx)} km/h</small><div class="wxflags">${flagHtml(wxFlags(mx,mn,pp,gx,dc))}</div></div></div>`;}
-    }
-  }
-  return now+ride;
+  if(!date) return `<div class="wxnow"><span class="wxic" aria-hidden="true">${ic}</span><div><b>${Math.round(t)}\u00b0</b> <span>${lbl}, feels ${Math.round(fl)}\u00b0</span><small>Now: wind ${Math.round(ws)} km/h, gusts ${Math.round(gu)}</small></div></div><p class="wxmuted">Set the tour start date to see the forecast for this town on the ride day.</p>`;
+  const ds=isoDate(date), D=W.D[ds], today=isoDate(new Date());
+  if(ds<today) return `<p class="wxmuted">${dayLbl(date)} has passed.</p>`+nowLine;
+  if(!D) return `<p class="wxmuted">The forecast for ${dayLbl(date)} appears about 16 days ahead.</p>`+nowLine;
+  const [dc,mx,mn,pp,gx]=D; const [dl,di]=wxc(dc); const H=hourAt(town,date,eta);
+  let main;
+  if(H){const [ht,hf,hp,hc,hw,hg]=H; const [hl,hi]=wxc(hc);
+    main=`<div class="wxride first"><span class="wxic" aria-hidden="true">${hi}</span><div><small class="wxk">Forecast, ${dayLbl(date)}${eta!=null?` at ${fmtT(eta)}`:''}</small><b>${Math.round(ht)}\u00b0 ${hl}</b> <span>feels ${Math.round(hf)}\u00b0</span><small>Rain ${hp??0}%, wind ${Math.round(hw)} km/h, gusts ${Math.round(hg)}. Day ${Math.round(mn)}\u2013${Math.round(mx)}\u00b0, ${dl.toLowerCase()}, rain up to ${pp??0}%.</small><div class="wxflags">${flagHtml(wxFlags(ht,hf,hp,hg,hc))}</div></div></div>`;}
+  else main=`<div class="wxride first"><span class="wxic" aria-hidden="true">${di}</span><div><small class="wxk">Forecast, ${dayLbl(date)}</small><b>${Math.round(mn)}\u2013${Math.round(mx)}\u00b0 ${dl}</b><small>Rain up to ${pp??0}%, gusts to ${Math.round(gx)} km/h</small><div class="wxflags">${flagHtml(wxFlags(mx,mn,pp,gx,dc))}</div></div></div>`;
+  return main+(ds===today?nowLine:'');
 }
+const fmtLong=d=>d.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+function renderDates(){
+  $$('[data-ddate]').forEach(el=>{const dt=rideDate(+el.dataset.ddate);
+    el.innerHTML=dt?esc(fmtLong(dt)):`<button type="button" class="setdate">Set the tour start date</button>`;});
+}
+document.addEventListener('click',e=>{ if(e.target.closest('.setdate')){ const lb=$('#livebar'); lb.classList.add('open'); const i=$('#tstart'); setTimeout(()=>{try{i.focus();i.showPicker&&i.showPicker()}catch(x){}},150);} });
 function dayWx(d){
   const date=rideDate(d.n); if(!WX||!date)return'';
   const ds=isoDate(date); if(ds<isoDate(new Date()))return'';
@@ -1704,6 +1712,7 @@ function dayWx(d){
   return `<div class="wxday"><span class="wxic" aria-hidden="true">${i}</span><div><b>Ride-day outlook, ${dayLbl(date)}</b><span>${Math.round(lo)}\u2013${Math.round(hi)}\u00b0 at our stops (feels-like low), rain up to ${pp}%, gusts to ${Math.round(gu)} km/h. Worst: ${l.toLowerCase()}.</span><div class="wxflags">${fl.length?flagHtml(fl):'<span class="wxflag ok">Good riding weather</span>'}</div></div></div>`;
 }
 function renderWx(){
+  renderDates();
   $$('[data-wx]').forEach(el=>{const [dn,...r]=el.dataset.wx.split('|');el.innerHTML=townWx(+dn,r.join('|'))});
   ORDER.forEach(d=>{const el=document.querySelector(`[data-wxday="${d.n}"]`); if(el) el.innerHTML=dayWx(d);});
   const st=$('#wxstatus'); if(st) st.innerHTML=(wxBusy?'Updating weather\u2026':WX?`Weather updated ${ago(WX.at)}${navigator.onLine?'':' (offline, showing last update)'}`:navigator.onLine?'':'Weather needs signal the first time.')+(wxErr?` <span class="wxerr">${wxErr}</span>`:'')+` <button type="button" class="linkb" id="wxrefresh">Refresh</button>`;
