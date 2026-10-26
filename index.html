@@ -53,7 +53,7 @@ a{color:inherit}
 .wrap{max-width:980px;margin:0 auto;padding:0 20px}
 
 /* hero */
-.hero{padding:40px 0 28px}
+.hero{padding:40px 20px 28px}
 .hero h1{font:800 clamp(52px,13vw,112px)/.86 var(--display);letter-spacing:-.01em;margin:0;text-transform:uppercase}
 .hero .sub{font:500 clamp(18px,3.4vw,22px)/1.35 var(--body);color:var(--muted);max-width:40ch;margin:14px 0 26px}
 .odo{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
@@ -569,6 +569,7 @@ html.landing-on{background:#121920!important}
 body{min-height:100%}
 .diagline{margin:28px 0 0;font-size:13px;color:var(--muted)}
 #diagdlg pre{white-space:pre-wrap;font:13px/1.45 ui-monospace,Menlo,monospace;background:var(--soft);padding:10px;border-radius:8px;margin:8px 0 12px}
+footer{padding-left:20px!important;padding-right:20px!important}
 </style>
 </head>
 <body>
@@ -2158,7 +2159,7 @@ function renderToday(){
       ${last?'':openAheadHtml(n,c.st,c.i)}
       <p class="tdfoot"><a href="#s${n}-${slug(c.cur.t)}">Open Day ${n} in the roadbook</a>${c.started?` <button type="button" class="linkb" data-act="lvclear">Reset position</button>`:''}</p>`;
   }
-  box.innerHTML=h;
+  box.innerHTML=h+'<p class="diagline">Something look wrong on screen? <button type="button" class="linkb diagbtn">Run a screen check</button></p>';
   if(typeof renderDinners==='function')renderDinners();
   const ds=document.getElementById('tdstart'); if(ds){ds.value=S.live.start||'';}
 }
@@ -2206,14 +2207,14 @@ setInterval(()=>{applyFocus(); if(curTab==='today')renderToday();},60e3);
     return {standalone:!!navigator.standalone, screen:screen.width+'x'+screen.height, full:full, innerHeight:innerHeight,
       clientHeight:document.documentElement.clientHeight, fixedArea:Math.round(probe.getBoundingClientRect().height),
       visualViewport:window.visualViewport?Math.round(visualViewport.height):null,
-      safeTop:cs.paddingTop, safeBottom:cs.paddingBottom, gapApplied:getComputedStyle(document.documentElement).getPropertyValue('--iosgap')||'0px',
+      safeTop:cs.paddingTop, safeBottom:cs.paddingBottom, measuredGap:window.__measuredGap, tabBarBottom:(document.querySelector('.tabbar')?Math.round(document.querySelector('.tabbar').getBoundingClientRect().bottom):null),
       ua:navigator.userAgent};
   };
   function fix(){
     if(!navigator.standalone){document.documentElement.style.setProperty('--iosgap','0px');return}
     var i=__screenInfo(); var h=Math.min(i.fixedArea||i.innerHeight,i.innerHeight,i.clientHeight||i.innerHeight);
-    var gap=Math.round(i.full-h); if(!(gap>0&&gap<110)) gap=0;
-    document.documentElement.style.setProperty('--iosgap',gap+'px');
+    window.__measuredGap=Math.round(i.full-h);
+    document.documentElement.style.setProperty('--iosgap','0px');
   }
   fix(); [50,300,1000].forEach(function(t){setTimeout(fix,t)});
   addEventListener('resize',fix); addEventListener('orientationchange',function(){setTimeout(fix,300)});
@@ -2221,7 +2222,7 @@ setInterval(()=>{applyFocus(); if(curTab==='today')renderToday();},60e3);
   if(window.visualViewport) visualViewport.addEventListener('resize',fix);
 })();
 document.addEventListener('click',function(e){
-  if(!e.target.closest('#diagbtn'))return;
+  if(!e.target.closest('#diagbtn,.diagbtn'))return;
   var i=window.__screenInfo?__screenInfo():{}, txt=Object.keys(i).map(function(k){return k+': '+i[k]}).join('\n');
   document.getElementById('diagtxt').textContent=txt; document.getElementById('diagdlg').showModal();
 });
