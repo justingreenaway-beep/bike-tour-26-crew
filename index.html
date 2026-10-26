@@ -1842,12 +1842,15 @@ function wxLive(){
 const _updateLive=updateLive; updateLive=function(){_updateLive();wxLive()};
 document.addEventListener('click',e=>{ if(e.target.closest('#wxrefresh')) wxFetch(true); if(e.target.closest('.seg button')) setTimeout(renderWx,0); });
 document.addEventListener('change',e=>{ if(e.target.id==='tstart') setTimeout(()=>wxFetch(true),50); });
-document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') wxFetch(false); });
-window.addEventListener('online',()=>wxFetch(false));
+// refresh the weather every time the app is opened or brought back to the screen
+function wxOnOpen(){ if(WX&&Date.now()-WX.at<60e3&&!wxErr){renderWx();return} wxFetch(true); }
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') wxOnOpen(); });
+window.addEventListener('pageshow',e=>{ if(e.persisted) wxOnOpen(); });
+window.addEventListener('online',()=>wxOnOpen());
 setInterval(()=>{ if(document.visibilityState==='visible') wxFetch(false); },10*60e3);
 setInterval(renderWx,60e3);
 let wxLastStart=S.live.start; setInterval(()=>{ if(S.live.start!==wxLastStart){ wxLastStart=S.live.start; wxFetch(true); } },5000);
-wxFetch(false);
+wxFetch(true);
 </script>
 <script>
 (function(){
