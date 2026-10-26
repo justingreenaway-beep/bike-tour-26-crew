@@ -407,9 +407,77 @@ section.dinners{margin:56px 0 0}
 .dnnight{font:800 14px/1 var(--display);text-transform:uppercase;color:var(--c);margin:0 0 8px}
 .dncard .dnhead span{display:none}.dncard .dnhead{margin-bottom:0}
 .kcdin{margin:-6px 0 14px;font-size:14px;color:var(--muted)}
+.wx{margin:8px 0 6px;padding:10px 12px;border-radius:10px;background:var(--soft);border:1px solid var(--rule)}
+.wx:empty{display:none}
+.wxnow,.wxride,.wxday{display:flex;gap:10px;align-items:flex-start}
+.wxride{margin-top:8px;padding-top:8px;border-top:1px dotted var(--rule)}
+.wxic{font-size:26px;line-height:1;flex:0 0 auto;width:30px;text-align:center}
+.wxnow b,.wxride b{font:700 20px/1.1 var(--display)}
+.wxnow span,.wxride span{font-size:14px}
+.wx small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.wxmuted{font-size:13px;color:var(--muted);margin:6px 0 0}
+.wxflags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.wxflag{font:600 12px/1 var(--body);padding:4px 7px;border-radius:999px;background:var(--surface);border:1px solid var(--rule)}
+.wxflag.warn{background:var(--vis);color:var(--visink);border-color:var(--vis)}
+.wxflag.bad{background:var(--warn);color:#fff;border-color:var(--warn)}
+.wxflag.ok{background:var(--d3);color:#fff;border-color:var(--d3)}
+[data-wxday]:empty{display:none}
+[data-wxday]{margin:4px 0 14px;padding:12px 14px;border-radius:10px;background:var(--surface);border:1.5px solid var(--c)}
+.wxday b{display:block;font:700 18px/1.1 var(--display);text-transform:uppercase}
+.wxday span{font-size:14px}
+.wxbar{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:14px 0 0;font-size:14px;color:var(--muted)}
+.wxerr{color:var(--warn);font-weight:600}
+.lvwx{background:rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;font-size:14px;margin:4px 0 10px}
+
+/* landing */
+.landing{position:fixed;inset:0;z-index:60;background:#121920;color:#F4F5F2;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
+  padding:calc(28px + env(safe-area-inset-top,0px)) 24px calc(30px + env(safe-area-inset-bottom,0px))}
+.landing[hidden]{display:none}
+.landing .lbg{position:absolute;inset:-4%;background-size:auto 122%;background-position:30% 72%;background-repeat:no-repeat;opacity:.5;filter:saturate(1.15)}
+.landing::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,25,32,.15) 0%,rgba(18,25,32,.55) 45%,#121920 82%)}
+.landing .lin{position:relative;z-index:1;max-width:560px;width:100%;margin:0 auto}
+.landing .lkick{display:inline-block;font:800 15px/1 "Barlow Condensed","Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.08em;background:#F2C200;color:#2A2300;padding:6px 9px 5px;border-radius:4px;margin:0 0 16px}
+.landing h1{font:800 clamp(52px,15vw,96px)/.88 "Barlow Condensed","Arial Narrow",sans-serif;text-transform:uppercase;margin:0 0 14px;letter-spacing:-.005em}
+.landing h1 span{color:#F2C200}
+.landing .lsub{font:500 17px/1.45 "Barlow",system-ui,sans-serif;color:#C9D1D8;margin:0 0 22px;max-width:36ch}
+.landing .lstats{display:flex;gap:22px;margin:0 0 26px;font:700 26px/1 "Barlow Condensed","Arial Narrow",sans-serif}
+.landing .lstats small{display:block;font:500 12px/1.3 "Barlow",system-ui,sans-serif;color:#9AA6B0;margin-top:4px}
+.landing .lgo{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
+  background:#F2C200;color:#2A2300;font:800 24px/1 "Barlow Condensed","Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.02em;padding:18px 20px;border-radius:999px;box-shadow:0 10px 30px rgba(242,194,0,.25)}
+.landing .lgo:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.landing .lgo svg{transition:transform .2s}
+.landing .lgo:hover svg{transform:translateX(4px)}
+.landing .lfine{font:500 12px/1.4 "Barlow",system-ui,sans-serif;color:#7F8B95;margin:14px 0 0;text-align:center}
+@media (prefers-reduced-motion:no-preference){
+  .landing .lin>*{animation:lrise .6s cubic-bezier(.2,.7,.2,1) both}
+  .landing .lin>*:nth-child(2){animation-delay:.08s}.landing .lin>*:nth-child(3){animation-delay:.16s}.landing .lin>*:nth-child(4){animation-delay:.24s}.landing .lin>*:nth-child(5){animation-delay:.32s}
+  .landing.out{animation:lout .35s ease forwards}
+  @keyframes lrise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes lout{to{opacity:0;transform:scale(1.02)}}
+}
+html.landing-on,html.landing-on body{overflow:hidden}
 </style>
 </head>
 <body>
+<div class="landing" id="landing" role="dialog" aria-modal="true" aria-labelledby="ltitle">
+  <div class="lbg" id="lbg" aria-hidden="true"></div>
+  <div class="lin">
+    <p class="lkick">Bike Tour 26</p>
+    <h1 id="ltitle">Welcome to Bike Tours R&nbsp;Us <span>2026</span></h1>
+    <p class="lsub">Canberra, the Central West, Blue Mountains, Southern Highlands and South Coast. Four days, twelve riders and a lot of bakeries.</p>
+    <div class="lstats"><div>1,154 km<small>primary route</small></div><div>4 days<small>3 nights</small></div><div>85<small>bakeries audited</small></div></div>
+    <button type="button" class="lgo" id="lgo">Open the Crew Edition<svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1 8h18M13 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <p class="lfine">Sign in once with the email and password Justin sent you.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var L=document.getElementById('landing');
+  try{ if(sessionStorage.getItem('bt26-landed')){ L.hidden=true; return; } }catch(e){}
+  document.documentElement.classList.add('landing-on');
+})();
+</script>
+
 <div class="login" id="login" hidden>
   <form id="lgform" autocomplete="on">
     <h1>Tour 26<br>Crew</h1>
@@ -432,6 +500,7 @@ section.dinners{margin:56px 0 0}
   <p class="facts"><b>16 h 43 m</b> riding, <b>26 h</b> door to door, <b>12</b> riders, <b>4</b> days. Day 3 Option 2 adds 49 km. Justin adds about 500 km riding solo from Caringbah and back.</p>
   <p style="margin:10px 0 0;color:var(--muted);max-width:62ch">Tick off and score every bakery, race the crew for Pie Champion, mark where the group is with “We’re here”, play the nightly trivia and pin photos to each town.</p>
   <div class="banner" id="banner" hidden></div>
+  <p class="wxbar" id="wxstatus"></p>
   <div class="toolbar"><button class="btn" id="openall" type="button">Open all bakery lists</button><button class="btn" id="closeall" type="button">Close all</button><button class="btn" id="factsall" type="button">Reveal all facts</button></div>
 </header>
 
@@ -580,6 +649,7 @@ section.dinners{margin:56px 0 0}
 
 <footer class="wrap">
   <p>Route, timings and run sheet from the 2026 Bike Tour Info workbook (v4), Option 1 timings unless noted. Maps: Esri World Imagery; routes &#169; OpenStreetMap contributors / OSRM.</p>
+  <p class="wxattr">Live weather: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0), using Bureau of Meteorology and other national weather models. For official warnings, check the <a href="http://www.bom.gov.au/nsw/warnings/" target="_blank" rel="noopener">BOM NSW warnings</a>.</p>
   <p>Bakery ratings, review counts and opening hours from Google Maps, checked 4 October 2026. Hours change, especially in small towns, so check on the day. Rankings weigh rating, review volume and how well each place suits a quick group stop.</p>
 </footer>
 
@@ -1072,6 +1142,7 @@ ORDER.forEach((d,i)=>{
       <div class="top"><h3 class="town">${esc(s.t)}</h3>${s.time?`<span class="time">${esc(s.time)}</span>`:''}</div>
       <div class="road">${esc(s.road)}</div>
       <div class="tags">${tags}</div>
+      <div class="wx" data-wx="${esc(key)}"></div>
       ${s.note?`<p class="note">${esc(s.note)}</p>`:''}
       ${fact}
       ${s.stay?`<div class="stay">${esc(s.stay)}</div>`:''}
@@ -1087,7 +1158,7 @@ ORDER.forEach((d,i)=>{
   host.insertAdjacentHTML('beforeend',`<section class="day${d.solo?' solo':''}" id="day${d.n}" style="--d:var(${d.col})">
     <div class="dayhead"><div class="no">${d.lab||'Day '+d.n}</div><h2>${esc(d.title)}</h2>${seg}
     <div class="stats"><div data-k="km">${d.km} km<small>distance</small></div><div data-k="ride">${d.ride}<small>riding</small></div><div data-k="total">${d.total}<small>with stops</small></div></div>
-    <p class="feel" data-k="feel">${esc(d.feel)}</p><p class="roads" data-k="roads">${esc(d.roads)}</p>
+    <p class="feel" data-k="feel">${esc(d.feel)}</p><div data-wxday="${d.n}"></div><p class="roads" data-k="roads">${esc(d.roads)}</p>
     ${bestCard}
     ${d.fuelNote?`<p class="fuelnote">${esc(d.fuelNote)}</p>`:''}
     ${d.map?`<details class="map"><summary>Show day map</summary><img src="${d.map}" alt="Day ${d.n} route map" loading="lazy" data-k="map"></details>`:''}</div>
@@ -1535,6 +1606,141 @@ document.addEventListener('click',e=>{
 });
 renderDinners();
 
+</script>
+<script>
+/* ---------- Weather (Open-Meteo, live in the PWA) ---------- */
+const WX_COORDS={'Conder':[-35.459,149.104],'Tharwa':[-35.509,149.069],'Cavan':[-34.98,148.87],'Yass':[-34.842,148.909],'Rye Park':[-34.517,148.909],'Cowra':[-33.835,148.691],'Blayney':[-33.532,149.254],'Millthorpe':[-33.446,149.185],'Bathurst':[-33.42,149.577],'Ilford':[-32.958,149.858],'Lithgow':[-33.481,150.157],'Penrith':[-33.751,150.694],'The Oaks':[-34.073,150.571],'Camden':[-34.054,150.696],'Picton':[-34.17,150.611],'Mount Keira':[-34.397,150.857],'Shellharbour':[-34.579,150.87],'Mount Murray':[-34.555,150.66],'Bowral':[-34.478,150.418],'Moss Vale':[-34.548,150.371],'Fitzroy Falls':[-34.645,150.481],'Kangaroo Valley':[-34.738,150.534],'Bellawongarah':[-34.765,150.62],'Kiama':[-34.671,150.854],'Jamberoo':[-34.647,150.776],'Robertson':[-34.588,150.596],'Wildes Meadow':[-34.613,150.53],'Bomaderry':[-34.85,150.61],'Currarong':[-35.016,150.82],'Huskisson':[-35.04,150.672],'Nerriga':[-35.115,150.084],'Bungendore':[-35.254,149.443],'Theodore':[-35.45,149.12],'Caringbah':[-34.047,151.122],'Goulburn':[-34.754,149.718],'Berry':[-34.775,150.695],'Wollongong':[-34.424,150.893]};
+const WX_TOWNS=Object.keys(WX_COORDS);
+const WXKEY='bt26-wx-v1';
+const SOLO_ETA={0:{'Caringbah':445,'Goulburn':645,'Conder':830},5:{'Huskisson':830,'Berry':915,'Wollongong':1045,'Caringbah':1230}};
+const WXC={0:['Clear','\u2600\ufe0f'],1:['Mostly clear','\ud83c\udf24\ufe0f'],2:['Partly cloudy','\u26c5'],3:['Overcast','\u2601\ufe0f'],45:['Fog','\ud83c\udf2b\ufe0f'],48:['Icy fog','\ud83c\udf2b\ufe0f'],51:['Light drizzle','\ud83c\udf26\ufe0f'],53:['Drizzle','\ud83c\udf26\ufe0f'],55:['Heavy drizzle','\ud83c\udf27\ufe0f'],56:['Freezing drizzle','\ud83c\udf27\ufe0f'],57:['Freezing drizzle','\ud83c\udf27\ufe0f'],61:['Light rain','\ud83c\udf26\ufe0f'],63:['Rain','\ud83c\udf27\ufe0f'],65:['Heavy rain','\ud83c\udf27\ufe0f'],66:['Freezing rain','\ud83c\udf27\ufe0f'],67:['Freezing rain','\ud83c\udf27\ufe0f'],71:['Light snow','\ud83c\udf28\ufe0f'],73:['Snow','\ud83c\udf28\ufe0f'],75:['Heavy snow','\ud83c\udf28\ufe0f'],77:['Snow grains','\ud83c\udf28\ufe0f'],80:['Showers','\ud83c\udf26\ufe0f'],81:['Showers','\ud83c\udf27\ufe0f'],82:['Heavy showers','\ud83c\udf27\ufe0f'],85:['Snow showers','\ud83c\udf28\ufe0f'],86:['Snow showers','\ud83c\udf28\ufe0f'],95:['Thunderstorm','\u26c8\ufe0f'],96:['Storm with hail','\u26c8\ufe0f'],99:['Storm with hail','\u26c8\ufe0f']};
+const wxc=c=>WXC[c]||['\u2014',''];
+let WX=null; try{WX=JSON.parse(localStorage.getItem(WXKEY)||'null')}catch(e){}
+let wxBusy=false, wxErr='';
+const pad2=n=>String(n).padStart(2,'0');
+const isoDate=d=>`${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+function rideDate(dn){
+  if(!S.live.start)return null; const [y,m,d]=S.live.start.split('-').map(Number); if(!y)return null;
+  const off=dn===0?-1:dn===5?3:dn-1; return new Date(y,m-1,d+off);
+}
+function tourDates(){const out=[];[0,1,2,3,4].forEach(dn=>{const d=rideDate(dn);if(d)out.push(isoDate(d))});return out}
+function wxDays(){ // forecast days needed: cover the tour if it's within range, else a week
+  const now=new Date(), last=rideDate(4); if(!last) return 7;
+  const diff=Math.ceil((last-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5)+1;
+  return diff<1?3:Math.min(16,Math.max(3,diff));
+}
+async function wxFetch(force){
+  if(wxBusy)return; if(!navigator.onLine){renderWx();return}
+  const today=isoDate(new Date()), need=tourDates().filter(d=>d>=today); const fresh=WX&&Date.now()-WX.at<45*60e3&&WX.days>=wxDays()&&need.every(d=>(WX.keep||[]).includes(d)||!Object.values(WX.towns||{}).some(x=>x.D&&x.D[d]));
+  if(fresh&&!force){renderWx();return}
+  wxBusy=true; wxErr=''; renderWx();
+  try{
+    const lat=WX_TOWNS.map(t=>WX_COORDS[t][0]).join(','), lon=WX_TOWNS.map(t=>WX_COORDS[t][1]).join(','), days=wxDays();
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`+
+      `&current=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,wind_gusts_10m`+
+      `&hourly=temperature_2m,apparent_temperature,precipitation_probability,weather_code,wind_speed_10m,wind_gusts_10m`+
+      `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_gusts_10m_max`+
+      `&timezone=Australia%2FSydney&wind_speed_unit=kmh&forecast_days=${days}`;
+    const r=await fetch(url); if(!r.ok) throw new Error('HTTP '+r.status);
+    let j=await r.json(); if(!Array.isArray(j)) j=[j];
+    const keep=new Set([...tourDates(), isoDate(new Date()), isoDate(new Date(Date.now()+864e5))]);
+    const towns={};
+    j.forEach((o,i)=>{const t=WX_TOWNS[i]; if(!t||!o)return; const h=o.hourly||{}, H={};
+      (h.time||[]).forEach((ts,k)=>{ if(keep.has(ts.slice(0,10))){ H[ts]=[h.temperature_2m[k],h.apparent_temperature[k],h.precipitation_probability[k],h.weather_code[k],h.wind_speed_10m[k],h.wind_gusts_10m[k]]; } });
+      const dd=o.daily||{}, D={}; (dd.time||[]).forEach((ds,k)=>{D[ds]=[dd.weather_code[k],dd.temperature_2m_max[k],dd.temperature_2m_min[k],dd.precipitation_probability_max[k],dd.wind_gusts_10m_max[k]]});
+      const c=o.current||{}; towns[t]={c:[c.temperature_2m,c.apparent_temperature,c.precipitation,c.weather_code,c.wind_speed_10m,c.wind_gusts_10m,c.time],H,D}; });
+    WX={at:Date.now(),days,towns,keep:[...keep]}; try{localStorage.setItem(WXKEY,JSON.stringify(WX))}catch(e){}
+  }catch(e){ wxErr='Couldn\u2019t reach the weather service.'; }
+  wxBusy=false; renderWx();
+}
+function wxFlags(t,feels,pp,gust,code){
+  const f=[]; if(gust>=60)f.push(['Strong gusts','bad']); else if(gust>=45)f.push(['Gusty','warn']);
+  if(pp>=70||[63,65,81,82].includes(code))f.push(['Wet roads likely','bad']); else if(pp>=40)f.push(['Chance of rain','warn']);
+  if(code>=95)f.push(['Storms','bad']); if([45,48].includes(code))f.push(['Fog','warn']);
+  if(feels!=null&&feels<=4)f.push(['Very cold','bad']); else if(feels!=null&&feels<=9)f.push(['Cold','warn']);
+  if(t!=null&&t>=33)f.push(['Hot','warn']); return f;
+}
+const flagHtml=f=>f.map(([n,k])=>`<span class="wxflag ${k}">${n}</span>`).join('');
+function etaFor(dn,town){
+  if(dn===0||dn===5) return SOLO_ETA[dn][town]||null;
+  const st=dayStops(dn,dn===3&&viewOpt2), s=st.find(x=>x.t===town); if(!s)return null;
+  return s.arr||s.dep||null;
+}
+function hourAt(town,date,hhmm){
+  const W=WX&&WX.towns[town]; if(!W||!date||hhmm==null)return null;
+  const h=Math.min(23,Math.round(hhmm/100+((hhmm%100)>=30?0.5:0)-0.0001)), key=`${isoDate(date)}T${pad2(Math.floor(hhmm/100)+((hhmm%100)>=30?1:0))}:00`;
+  return W.H[key]||null;
+}
+const ago=ms=>{const m=Math.round((Date.now()-ms)/60000);return m<1?'just now':m<60?`${m} min ago`:`${Math.round(m/60)} h ago`};
+const dayLbl=d=>d.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'});
+function townWx(dn,town){
+  const W=WX&&WX.towns[town]; if(!W)return wxBusy?'<p class="wxmuted">Loading weather\u2026</p>':'';
+  const [t,fl,pr,code,ws,gu,ct]=W.c; const [lbl,ic]=wxc(code);
+  const now=`<div class="wxnow"><span class="wxic" aria-hidden="true">${ic}</span><div><b>${Math.round(t)}\u00b0</b> <span>${lbl}, feels ${Math.round(fl)}\u00b0</span><small>Now: wind ${Math.round(ws)} km/h, gusts ${Math.round(gu)}${pr>0?`, ${pr} mm rain`:''}</small></div></div>`;
+  let ride='';
+  const date=rideDate(dn), eta=etaFor(dn,town);
+  if(!date) ride=`<p class="wxmuted">Set the tour start date in the tracker for the ride-day forecast.</p>`;
+  else{
+    const ds=isoDate(date), D=W.D[ds], today=isoDate(new Date());
+    if(ds<today) ride=`<p class="wxmuted">Ride day (${dayLbl(date)}) has passed.</p>`;
+    else if(!D) ride=`<p class="wxmuted">Ride-day forecast (${dayLbl(date)}) appears about 16 days out.</p>`;
+    else{
+      const H=hourAt(town,date,eta); const [dc,mx,mn,pp,gx]=D;
+      if(H){const [ht,hf,hp,hc,hw,hg]=H; const [hl,hi]=wxc(hc);
+        ride=`<div class="wxride"><span class="wxic" aria-hidden="true">${hi}</span><div><b>${dayLbl(date)}, ${fmtT(eta)}: ${Math.round(ht)}\u00b0</b> <span>${hl}, feels ${Math.round(hf)}\u00b0</span><small>Rain ${hp??0}%, wind ${Math.round(hw)} km/h, gusts ${Math.round(hg)}. Day ${Math.round(mn)}\u2013${Math.round(mx)}\u00b0</small><div class="wxflags">${flagHtml(wxFlags(ht,hf,hp,hg,hc))}</div></div></div>`;}
+      else{ const [dl,di]=wxc(dc); ride=`<div class="wxride"><span class="wxic" aria-hidden="true">${di}</span><div><b>${dayLbl(date)}: ${Math.round(mn)}\u2013${Math.round(mx)}\u00b0</b> <span>${dl}</span><small>Rain up to ${pp??0}%, gusts to ${Math.round(gx)} km/h</small><div class="wxflags">${flagHtml(wxFlags(mx,mn,pp,gx,dc))}</div></div></div>`;}
+    }
+  }
+  return now+ride;
+}
+function dayWx(d){
+  const date=rideDate(d.n); if(!WX||!date)return'';
+  const ds=isoDate(date); if(ds<isoDate(new Date()))return'';
+  const stops=(d.solo?d.stops:dayStops(d.n,d.n===3&&viewOpt2)).map(s=>s.t);
+  let lo=99,hi=-99,pp=0,gu=0,codes=[],n=0;
+  stops.forEach(t=>{const H=hourAt(t,date,etaFor(d.n,t))||null; const W=WX.towns[t]; if(H){n++;lo=Math.min(lo,H[1]);hi=Math.max(hi,H[0]);pp=Math.max(pp,H[2]||0);gu=Math.max(gu,H[5]);codes.push(H[3])} else if(W&&W.D[ds]){n++;const D=W.D[ds];lo=Math.min(lo,D[2]);hi=Math.max(hi,D[1]);pp=Math.max(pp,D[3]||0);gu=Math.max(gu,D[4]);codes.push(D[0])}});
+  if(!n)return `<p class="wxmuted">Ride-day forecast for ${dayLbl(date)} appears about 16 days out.</p>`;
+  const worst=Math.max(...codes), [l,i]=wxc(worst), fl=wxFlags(hi,lo,pp,gu,worst);
+  return `<div class="wxday"><span class="wxic" aria-hidden="true">${i}</span><div><b>Ride-day outlook, ${dayLbl(date)}</b><span>${Math.round(lo)}\u2013${Math.round(hi)}\u00b0 at our stops (feels-like low), rain up to ${pp}%, gusts to ${Math.round(gu)} km/h. Worst: ${l.toLowerCase()}.</span><div class="wxflags">${fl.length?flagHtml(fl):'<span class="wxflag ok">Good riding weather</span>'}</div></div></div>`;
+}
+function renderWx(){
+  $$('[data-wx]').forEach(el=>{const [dn,...r]=el.dataset.wx.split('|');el.innerHTML=townWx(+dn,r.join('|'))});
+  ORDER.forEach(d=>{const el=document.querySelector(`[data-wxday="${d.n}"]`); if(el) el.innerHTML=dayWx(d);});
+  const st=$('#wxstatus'); if(st) st.innerHTML=(wxBusy?'Updating weather\u2026':WX?`Weather updated ${ago(WX.at)}${navigator.onLine?'':' (offline, showing last update)'}`:navigator.onLine?'':'Weather needs signal the first time.')+(wxErr?` <span class="wxerr">${wxErr}</span>`:'')+` <button type="button" class="linkb" id="wxrefresh">Refresh</button>`;
+  wxLive();
+}
+function wxLive(){
+  const box=$('#lvbody'); if(!box||!S.live.day||!S.live.town||!WX)return; const old=$('#lvwx'); if(old)old.remove();
+  const st=dayStops(S.live.day,S.live.day===3&&S.live.opt===2), i=st.findIndex(s=>s.t===S.live.town); if(i<0)return;
+  const nx=st[i+1]; const W=WX.towns[S.live.town]; if(!W)return;
+  const [t,fl,,code,,gu]=W.c; let line=`Here now: ${wxc(code)[1]} ${Math.round(t)}\u00b0 (feels ${Math.round(fl)}\u00b0), gusts ${Math.round(gu)} km/h.`;
+  if(nx){const date=rideDate(S.live.day)||new Date(); const H=hourAt(nx.t,date,nx.arr); if(H) line+=` ${esc(nx.t)} at ${fmtT(nx.arr)}: ${wxc(H[3])[1]} ${Math.round(H[0])}\u00b0, rain ${H[2]??0}%, gusts ${Math.round(H[5])}.`; else if(WX.towns[nx.t]){const c=WX.towns[nx.t].c; line+=` ${esc(nx.t)} now: ${wxc(c[3])[1]} ${Math.round(c[0])}\u00b0.`}}
+  box.insertAdjacentHTML('afterbegin',`<p class="lvwx" id="lvwx">${line}</p>`);
+}
+// keep tracker panel weather in sync
+const _updateLive=updateLive; updateLive=function(){_updateLive();wxLive()};
+document.addEventListener('click',e=>{ if(e.target.closest('#wxrefresh')) wxFetch(true); if(e.target.closest('.seg button')) setTimeout(renderWx,0); });
+document.addEventListener('change',e=>{ if(e.target.id==='tstart') setTimeout(()=>wxFetch(true),50); });
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') wxFetch(false); });
+window.addEventListener('online',()=>wxFetch(false));
+setInterval(()=>{ if(document.visibilityState==='visible') wxFetch(false); },10*60e3);
+setInterval(renderWx,60e3);
+let wxLastStart=S.live.start; setInterval(()=>{ if(S.live.start!==wxLastStart){ wxLastStart=S.live.start; wxFetch(true); } },5000);
+wxFetch(false);
+</script>
+<script>
+(function(){
+  var L=document.getElementById('landing'); if(!L) return;
+  var img=document.querySelector('.fullmap img'); if(img&&img.src) document.getElementById('lbg').style.backgroundImage='url("'+img.src+'")';
+  var go=document.getElementById('lgo');
+  go.addEventListener('click',function(){
+    try{ sessionStorage.setItem('bt26-landed','1'); }catch(e){}
+    document.documentElement.classList.remove('landing-on');
+    var done=function(){ L.hidden=true; L.classList.remove('out'); };
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return done();
+    L.classList.add('out'); setTimeout(done,340);
+  });
+})();
 </script>
 <script>
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
