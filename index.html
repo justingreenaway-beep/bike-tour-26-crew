@@ -53,7 +53,7 @@ a{color:inherit}
 .wrap{max-width:980px;margin:0 auto;padding:0 20px}
 
 /* hero */
-.hero{padding:40px 20px 28px}
+.hero{padding:40px 0 28px}
 .hero h1{font:800 clamp(52px,13vw,112px)/.86 var(--display);letter-spacing:-.01em;margin:0;text-transform:uppercase}
 .hero .sub{font:500 clamp(18px,3.4vw,22px)/1.35 var(--body);color:var(--muted);max-width:40ch;margin:14px 0 26px}
 .odo{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
@@ -550,26 +550,6 @@ li.stop.passed:not(.open) .town{font-size:22px}
 li.stop.passed .node{background:var(--c);color:#fff;font-size:0}
 li.stop.passed .node::after{content:"\2713";font-size:18px}
 li.stop.passed:not(.open){padding-bottom:12px}
-
-/* iPhone home-screen fill fixes */
-html{background:var(--bg);min-height:100%}
-html.landing-on{background:#121920}
-.landing{top:0!important;bottom:calc(-1 * var(--iosgap,0px))!important;height:auto!important;min-height:100vh;min-height:100lvh}
-.login{top:0!important;bottom:calc(-1 * var(--iosgap,0px))!important;min-height:100vh;min-height:100lvh}
-.tabbar{bottom:calc(-1 * var(--iosgap,0px))!important}
-.tabbar::after{content:"";position:absolute;left:0;right:0;top:100%;height:120px;background:var(--surface)}
-.livebar{bottom:calc(58px + env(safe-area-inset-bottom,0px) - var(--iosgap,0px))!important}
-
-/* v2 screen-fill fixes */
-nav.days{padding-top:0!important;top:env(safe-area-inset-top,0px)!important}
-body::before{content:"";position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30;pointer-events:none}
-body:not([data-tab="roadbook"]) nav.days{border-bottom:0}
-html{height:100%;background:var(--surface)!important}
-html.landing-on{background:#121920!important}
-body{min-height:100%}
-.diagline{margin:28px 0 0;font-size:13px;color:var(--muted)}
-#diagdlg pre{white-space:pre-wrap;font:13px/1.45 ui-monospace,Menlo,monospace;background:var(--soft);padding:10px;border-radius:8px;margin:8px 0 12px}
-footer{padding-left:20px!important;padding-right:20px!important}
 </style>
 </head>
 <body>
@@ -756,7 +736,6 @@ footer{padding-left:20px!important;padding-right:20px!important}
     <h2>Photo wall</h2>
     <p class="muted" style="margin-top:-6px">Use “Add photo” on any town card. Photos show on that town and here.</p>
     <div id="wallgrid"></div>
-    <p class="diagline">Something look wrong on screen? <button type="button" class="linkb" id="diagbtn">Run a screen check</button></p>
   </section>
 
   <section class="dinners" id="dinners-sec">
@@ -801,7 +780,6 @@ footer{padding-left:20px!important;padding-right:20px!important}
   <button type="button" data-tab="court"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6M11 7l6 6M12.5 5.5l-6 6 3 3 6-6"/><path d="M8 13l-5 5 2 2 5-5"/><path d="M13 21h8"/></svg>Court</button>
   <button type="button" data-tab="crew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/></svg>Crew</button>
 </nav>
-<dialog id="diagdlg"><div class="dlg"><h3>Screen check</h3><p class="muted" style="margin:0">Take a screenshot of this and send it to Justin.</p><pre id="diagtxt"></pre><form method="dialog"><button class="btn">Close</button></form></div></dialog>
 <div class="toast" id="toast" hidden role="status"></div>
 <div class="livebar" id="livebar">
   <button class="lvtop" type="button" data-act="live" aria-controls="lvpanel"><span class="lvdot" aria-hidden="true"></span><span id="lvtxt"></span><svg class="lvchev" width="14" height="9" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
@@ -2159,7 +2137,7 @@ function renderToday(){
       ${last?'':openAheadHtml(n,c.st,c.i)}
       <p class="tdfoot"><a href="#s${n}-${slug(c.cur.t)}">Open Day ${n} in the roadbook</a>${c.started?` <button type="button" class="linkb" data-act="lvclear">Reset position</button>`:''}</p>`;
   }
-  box.innerHTML=h+'<p class="diagline">Something look wrong on screen? <button type="button" class="linkb diagbtn">Run a screen check</button></p>';
+  box.innerHTML=h;
   if(typeof renderDinners==='function')renderDinners();
   const ds=document.getElementById('tdstart'); if(ds){ds.value=S.live.start||'';}
 }
@@ -2193,39 +2171,6 @@ setInterval(()=>{applyFocus(); if(curTab==='today')renderToday();},60e3);
   setTab(start,{noTop:true});
 })();
 
-</script>
-<script>
-/* iPhone home-screen apps can lay the page out shorter than the screen (by about the status bar height), leaving a strip at the bottom.
-   Measure the real fixed-position area with a probe and stretch the bottom bars and full-screen pages to cover it. */
-(function(){
-  var probe=document.createElement('div'); probe.style.cssText='position:fixed;top:0;left:0;bottom:0;width:1px;visibility:hidden;pointer-events:none;z-index:-1';
-  var sa=document.createElement('div'); sa.style.cssText='position:fixed;visibility:hidden;pointer-events:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)';
-  document.body.appendChild(probe); document.body.appendChild(sa);
-  window.__screenInfo=function(){
-    var cs=getComputedStyle(sa), portrait=innerHeight>=innerWidth;
-    var full=portrait?Math.max(screen.height,screen.width):Math.min(screen.height,screen.width);
-    return {standalone:!!navigator.standalone, screen:screen.width+'x'+screen.height, full:full, innerHeight:innerHeight,
-      clientHeight:document.documentElement.clientHeight, fixedArea:Math.round(probe.getBoundingClientRect().height),
-      visualViewport:window.visualViewport?Math.round(visualViewport.height):null,
-      safeTop:cs.paddingTop, safeBottom:cs.paddingBottom, measuredGap:window.__measuredGap, tabBarBottom:(document.querySelector('.tabbar')?Math.round(document.querySelector('.tabbar').getBoundingClientRect().bottom):null),
-      ua:navigator.userAgent};
-  };
-  function fix(){
-    if(!navigator.standalone){document.documentElement.style.setProperty('--iosgap','0px');return}
-    var i=__screenInfo(); var h=Math.min(i.fixedArea||i.innerHeight,i.innerHeight,i.clientHeight||i.innerHeight);
-    window.__measuredGap=Math.round(i.full-h);
-    document.documentElement.style.setProperty('--iosgap','0px');
-  }
-  fix(); [50,300,1000].forEach(function(t){setTimeout(fix,t)});
-  addEventListener('resize',fix); addEventListener('orientationchange',function(){setTimeout(fix,300)});
-  document.addEventListener('visibilitychange',function(){setTimeout(fix,150)}); addEventListener('pageshow',fix);
-  if(window.visualViewport) visualViewport.addEventListener('resize',fix);
-})();
-document.addEventListener('click',function(e){
-  if(!e.target.closest('#diagbtn,.diagbtn'))return;
-  var i=window.__screenInfo?__screenInfo():{}, txt=Object.keys(i).map(function(k){return k+': '+i[k]}).join('\n');
-  document.getElementById('diagtxt').textContent=txt; document.getElementById('diagdlg').showModal();
-});
 </script>
 <script>
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
