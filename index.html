@@ -550,6 +550,15 @@ li.stop.passed:not(.open) .town{font-size:22px}
 li.stop.passed .node{background:var(--c);color:#fff;font-size:0}
 li.stop.passed .node::after{content:"\2713";font-size:18px}
 li.stop.passed:not(.open){padding-bottom:12px}
+
+/* iPhone home-screen fill fixes */
+html{background:var(--bg);min-height:100%}
+html.landing-on{background:#121920}
+.landing{top:0!important;bottom:calc(-1 * var(--iosgap,0px))!important;height:auto!important;min-height:100vh;min-height:100lvh}
+.login{top:0!important;bottom:calc(-1 * var(--iosgap,0px))!important;min-height:100vh;min-height:100lvh}
+.tabbar{bottom:calc(-1 * var(--iosgap,0px))!important}
+.tabbar::after{content:"";position:absolute;left:0;right:0;top:100%;height:120px;background:var(--surface)}
+.livebar{bottom:calc(58px + env(safe-area-inset-bottom,0px) - var(--iosgap,0px))!important}
 </style>
 </head>
 <body>
@@ -2171,6 +2180,19 @@ setInterval(()=>{applyFocus(); if(curTab==='today')renderToday();},60e3);
   setTab(start,{noTop:true});
 })();
 
+</script>
+<script>
+/* iPhone home-screen apps can report a viewport shorter than the screen, leaving a strip at the bottom. Measure it and stretch the fixed bars and full-screen pages to cover it. */
+(function(){
+  if(!window.navigator.standalone) return;
+  function fix(){
+    var portrait=innerHeight>=innerWidth, full=portrait?Math.max(screen.height,screen.width):Math.min(screen.height,screen.width);
+    var gap=Math.round(full-innerHeight); if(!(gap>0&&gap<80)) gap=0;
+    document.documentElement.style.setProperty('--iosgap',gap+'px');
+  }
+  fix(); addEventListener('resize',fix); addEventListener('orientationchange',function(){setTimeout(fix,300)});
+  document.addEventListener('visibilitychange',function(){setTimeout(fix,150)}); addEventListener('pageshow',fix);
+})();
 </script>
 <script>
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
